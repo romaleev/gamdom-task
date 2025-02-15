@@ -30,8 +30,8 @@
 		"test:watch:server": "npm run test:watch -w server",
 		"test:server:coverage": "npm run test:coverage -w server",
 		"test:e2e": "npx playwright test",
-		"lint": "eslint {client,server,e2e}/src/**/*.ts && prettier {client,server,e2e}/src/**/*.ts",
-		"lint:fix": "eslint --fix {client,server,e2e}/src/**/*.ts && prettier --write {client,server,e2e}/src/**/*.ts",
+		"lint": "eslint {client,server,types,e2e}/src/**/*.ts && prettier {client,server,types,e2e}/src/**/*.ts",
+		"lint:fix": "eslint --fix {client,server,types,e2e}/src/**/*.ts && prettier --write {client,server,types,e2e}/src/**/*.ts",
 		"update": "npm i npm-check-updates@latest --save-dev && ncu --root -ws -u && npm i && npm audit fix && npm run lint && npm test",
 		"prepare": "husky && npm run docker:init && playwright install"
 	},
@@ -48,7 +48,7 @@
 		"node": ">=18.0.0"
 	},
 	"lint-staged": {
-		"{client,server}/**/*.ts": [
+		"{client,server,types,e2e}/**/*.ts": [
 			"eslint --fix",
 			"prettier --write"
 		]
@@ -64,9 +64,12 @@
 	"homepage": "https://github.com/romaleev/gamdom-task#readme",
 	"devDependencies": {
 		"@playwright/test": "^1.50.1",
+		"@types/eslint-config-prettier": "^6.11.3",
 		"eslint": "^9.20.1",
 		"eslint-config-prettier": "^10.0.1",
-		"eslint-plugin-prettier": "^5.2.3",
+		"eslint-plugin-react": "^7.37.4",
+		"eslint-plugin-react-hooks": "^5.0.0",
+		"eslint-plugin-react-refresh": "^0.4.18",
 		"globals": "^15.15.0",
 		"husky": "^9.1.7",
 		"lint-staged": "^15.4.3",
