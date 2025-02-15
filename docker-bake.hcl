@@ -1,5 +1,5 @@
 group "default" {
-  targets = ["backend"]
+  targets = ["frontend", "backend"]
 }
 
 target "frontend" {
