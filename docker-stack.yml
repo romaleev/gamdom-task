@@ -1,0 +1,71 @@
+networks:
+  gamdom-network:
+    driver: overlay
+    attachable: true
+
+configs:
+  env:
+    file: ./server/.env.production
+
+services:
+  frontend:
+    image: gamdom-task-frontend:latest
+    ports:
+      - "4200:80"
+    configs:
+      - source: env
+        target: /app/.env.production
+    networks:
+      - gamdom-network # ✅ Add backend to network
+    depends_on:
+      - backend
+    deploy:
+      mode: replicated
+      replicas: 1  # ✅ Single frontend instance
+      restart_policy:
+        condition: any
+        delay: 5s
+    command: nginx -g 'daemon off;'
+
+  backend:
+    image: gamdom-task-backend:latest
+    ports:
+      - "3000:3000"
+    configs:
+      - source: env
+        target: /app/.env.production  # ✅ Mount it inside the container
+    networks:
+      - gamdom-network # ✅ Add backend to network
+    depends_on:
+      - database
+    deploy:
+      mode: replicated
+      replicas: 1  # ✅ Single instance of backend
+      restart_policy:
+        condition: any
+        delay: 5s
+    command: npm run prod -w server
+
+  database:
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    configs:
+      - source: env
+        target: /app/.env.production  # ✅ Mount it inside the container
+    networks:
+      - gamdom-network # ✅ Add backend to network
+    deploy:
+      mode: replicated
+      replicas: 1
+      restart_policy:
+        condition: any  # ✅ Restart always
+        delay: 5s
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    command: >
+      sh -c "export $$(grep -v '^#' /app/.env.production | xargs) &&
+      exec docker-entrypoint.sh postgres"
+
+volumes:
+  db-data:
