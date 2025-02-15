@@ -1,0 +1,80 @@
+{
+	"name": "gamdom-task",
+	"version": "1.0.0",
+	"description": "Online Betting Dashboard",
+	"main": "server/dist/index.js",
+	"private": true,
+	"scripts": {
+		"start": "npm-run-all --parallel start:client start:server postgres:start",
+		"start:client": "npm run start -w client",
+		"start:server": "npm run start -w server",
+		"build": "npm-run-all --parallel build:*",
+		"build:client": "npm run build -w client",
+		"build:server": "npm run build -w server",
+		"postgres:start": "docker service ls | grep -w postgres && docker service update --force postgres || docker service create --name postgres --publish 5432:5432 --env-file ./server/.env --detach postgres:latest",
+		"postgres:stop": "docker service rm postgres",
+		"postgres:prepare": "npm run postgres:migrate -w server && npm run postgres:seed -w server",
+		"docker:init": "(docker info | grep 'Swarm: active' || docker swarm init)",
+		"docker:deploy": "docker stack deploy -c docker-stack.yml gamdom-task",
+		"docker:build": "docker buildx bake --file docker-bake.hcl",
+		"docker:rm": "docker stack rm gamdom-task",
+		"docker:status": "docker service ls",
+		"docker:logs": "docker service ls --format '{{.Name}}' | grep '^gamdom-task_' | xargs -n1 -P4 docker service logs --follow --tail 100",
+		"docker:prune": "docker system prune -af && docker volume prune -f",
+		"test": "npm-run-all --parallel test:server",
+		"test:watch": "npm-run-all --parallel test:watch:*",
+		"test:client": "npm run test -w client",
+		"test:load": "npm run test:load -w server",
+		"test:watch:client": "npm run test:watch -w client",
+		"test:server": "npm run test -w server",
+		"test:watch:server": "npm run test:watch -w server",
+		"test:server:coverage": "npm run test:coverage -w server",
+		"test:e2e": "npx playwright test",
+		"lint": "eslint {client,server,e2e}/src/**/*.ts && prettier {client,server,e2e}/src/**/*.ts",
+		"lint:fix": "eslint --fix {client,server,e2e}/src/**/*.ts && prettier --write {client,server,e2e}/src/**/*.ts",
+		"update": "npm i npm-check-updates@latest --save-dev && ncu --root -ws -u && npm i && npm audit fix && npm run lint && npm test",
+		"prepare": "husky && npm run docker:init && playwright install"
+	},
+	"workspaces": [
+		"client",
+		"server"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+ssh://git@github.com/romaleev/gamdom-task.git"
+	},
+	"type": "module",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"lint-staged": {
+		"{client,server}/**/*.ts": [
+			"eslint --fix",
+			"prettier --write"
+		]
+	},
+	"keywords": [
+		"gamdom-task"
+	],
+	"author": "Roman Malieiev <aromaleev@gmail.com>",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/romaleev/gamdom-task/issues"
+	},
+	"homepage": "https://github.com/romaleev/gamdom-task#readme",
+	"devDependencies": {
+		"@playwright/test": "^1.50.1",
+		"eslint": "^9.20.1",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-prettier": "^5.2.3",
+		"globals": "^15.15.0",
+		"husky": "^9.1.7",
+		"lint-staged": "^15.4.3",
+		"npm-check-updates": "^17.1.14",
+		"npm-run-all": "^4.1.5",
+		"playwright": "^1.50.1",
+		"prettier": "^3.5.0",
+		"prettier-eslint": "^16.3.0",
+		"prettier-plugin-organize-imports": "^4.1.0"
+	}
+}
