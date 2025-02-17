@@ -85,10 +85,11 @@ const BetSlip = () => {
 			</Typography>
 			{selectedBet ? (
 				<Box sx={{ width: '100%' }}>
-					<Typography variant="h6" color="white" sx={{ textAlign: 'center' }}>
+					<Typography variant="h6" color="white" sx={{ textAlign: 'center' }} data-test={`betslip-event-name`}>
 						{events?.find((e) => e.event_id === selectedBet.event_id)?.event_name}
 					</Typography>
-					<Typography variant="body1" color="secondary" sx={{ mt: 2, textAlign: 'center', fontWeight: 'bold' }}>
+					<Typography variant="body1" color="secondary" sx={{ mt: 2, textAlign: 'center', fontWeight: 'bold' }}
+											data-test={`betslip-event-stake`}>
 						{oddName}: {oddValue}
 					</Typography>
 					<TextField
@@ -100,6 +101,11 @@ const BetSlip = () => {
 						value={stake}
 						onChange={(e) => {
 							setStake(e.target.value)
+						}}
+						InputProps={{
+							inputProps: {
+								'data-test': 'betslip-stake-amount', // ✅ Properly placed here
+							},
 						}}
 						sx={{
 							mt: 2,
@@ -126,7 +132,8 @@ const BetSlip = () => {
 					<Typography variant="body1" color="text.primary" sx={{ mt: 3, textAlign: 'center' }}>
 						{t('betSlip.estPayout')} <span>${totalProfit}</span>
 					</Typography>
-					<Button variant="contained" color="secondary"
+					<Button data-test={`betslip-place-bet`}
+									variant="contained" color="secondary"
 									sx={{ mt: 3, width: '100%', fontWeight: 'bold', p: 1, fontSize: '1.1rem' }}
 									onClick={handlePlaceBet}
 									disabled={loading}>

@@ -10,6 +10,7 @@ const SnackBar = () => {
 		<Snackbar open={!!snackbarText} autoHideDuration={3000} onClose={() => setSnackbarText('')}
 							message={snackbarText} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
 			<Alert
+				data-test="snackbar-message"
 				icon={false}
 				sx={{
 					backgroundColor: snackbarText === t('betSlip.betSuccess') ? 'secondary.main' : 'error.main',
@@ -20,7 +21,7 @@ const SnackBar = () => {
 					minWidth: '300px',
 					boxShadow: 4,
 					borderRadius: 2,
-					opacity: snackbarText ? 1 : 0
+					opacity: snackbarText ? 1 : 0,
 				}}
 			>
 				{snackbarText}

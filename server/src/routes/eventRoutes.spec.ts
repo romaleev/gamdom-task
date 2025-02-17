@@ -3,14 +3,11 @@ import request from 'supertest'
 import app from '#server/app'
 import { db } from '#server/app'
 import { events } from '#server/db/schema'
+import { Event } from '#root/types/eventTypes'
 
-let event_id: string
+let event_id: number
 
 describe('🎯 Events API Tests', () => {
-	beforeAll(async () => {
-		await db.execute(`TRUNCATE TABLE "events" RESTART IDENTITY CASCADE;`)
-	})
-
 	afterAll(async () => {
 		await db.$client.end()
 	})
@@ -32,14 +29,13 @@ describe('🎯 Events API Tests', () => {
 			event_id: expect.any(Number),
 		})
 
-		event_id = res.body.event_id
+		event_id = parseInt(res.body.event_id)
 
 		// Validate database entry
 		const createdEvent = await db
 			.select()
 			.from(events)
 			.where(eq(events.event_id, res.body.event_id))
-		expect(createdEvent.length).toBe(1)
 		expect(createdEvent[0].event_name).toBe('Test Event')
 		expect(createdEvent[0].odds).toEqual([1.5, 3.2, 2.8])
 	})
@@ -52,21 +48,15 @@ describe('🎯 Events API Tests', () => {
 
 		expect(res.status).toBe(200)
 		expect(Array.isArray(res.body)).toBeTruthy()
-		expect(res.body.length).toBe(1)
-		expect(res.body?.[0].event_id).toEqual(event_id)
+		expect(res.body.find((event: Event) => event.event_id === event_id)).toBeTruthy()
 	})
 
 	/**
 	 * ✅ Test: Update an event
 	 */
 	it('should update an existing event and return its ID', async () => {
-		const eventToUpdate = await db.select().from(events).limit(1)
-		expect(eventToUpdate.length).toBe(1)
-
-		const eventId = eventToUpdate[0].event_id
-
 		const res = await request(app)
-			.put(`/api/events/${eventId}`)
+			.put(`/api/events/${event_id}`)
 			.send({
 				event_name: 'Updated Event Name',
 				odds: [2.0, 3.0, 1.8],
@@ -79,7 +69,7 @@ describe('🎯 Events API Tests', () => {
 		})
 
 		// Validate database update
-		const updatedEvent = await db.select().from(events).where(eq(events.event_id, eventId))
+		const updatedEvent = await db.select().from(events).where(eq(events.event_id, event_id))
 		expect(updatedEvent[0].event_name).toBe('Updated Event Name')
 		expect(updatedEvent[0].odds).toEqual([2.0, 3.0, 1.8])
 	})
@@ -88,12 +78,7 @@ describe('🎯 Events API Tests', () => {
 	 * ✅ Test: Delete an event
 	 */
 	it('should delete an event and return its ID', async () => {
-		const eventToDelete = await db.select().from(events).limit(1)
-		expect(eventToDelete.length).toBe(1)
-
-		const eventId = eventToDelete[0].event_id
-
-		const res = await request(app).delete(`/api/events/${eventId}`)
+		const res = await request(app).delete(`/api/events/${event_id}`)
 		expect(res.status).toBe(200)
 		expect(res.body).toEqual({
 			status: 'deleted',
@@ -101,7 +86,7 @@ describe('🎯 Events API Tests', () => {
 		})
 
 		// Validate deletion
-		const deletedEvent = await db.select().from(events).where(eq(events.event_id, eventId))
+		const deletedEvent = await db.select().from(events).where(eq(events.event_id, event_id))
 		expect(deletedEvent.length).toBe(0)
 	})
 

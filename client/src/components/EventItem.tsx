@@ -22,6 +22,7 @@ const EventItem = (props: EventListItemProps) => {
 
 	return (
 		<Card
+			data-test={`event-${event.event_id}`}
 			sx={{
 				backgroundColor: 'background.paper',
 				color: 'text.primary',
@@ -29,18 +30,19 @@ const EventItem = (props: EventListItemProps) => {
 				padding: 2,
 				display: 'flex',
 				alignItems: 'center',
-				borderRadius: 2
+				borderRadius: 2,
 			}}
 			elevation={0}
 		>
 			<CardContent sx={{ flex: 2 }}>
-				<Typography variant="h6">{event.event_name}</Typography>
+				<Typography variant="h6" data-test={`event-name-${event.event_id}`}>{event.event_name}</Typography>
 			</CardContent>
 			<Box sx={{ display: 'flex', gap: '1.25em', flex: 3, mr: 1 }}>
 				{event.odds.map((odd, index) => {
 					const selected = selectedBet?.event_id === event.event_id && selectedBet.odd_id === index
 					return (
 						<Button
+							data-test={`event-odd-${event.event_id}-${index}`}
 							key={index}
 							variant="contained"
 							sx={{

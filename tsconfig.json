@@ -1,6 +1,12 @@
 {
 	"compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"#root/*": [
+				"./*"
+			]
+		},
 		"esModuleInterop": true,
-		"noEmit": true,
-	},
+		"noEmit": true
+	}
 }

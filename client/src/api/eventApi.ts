@@ -2,7 +2,7 @@ import ky from 'ky'
 import { useQuery } from '@tanstack/react-query'
 import { Event } from '#root/types/eventTypes'
 
-const API_URL = '/api/events'
+export const API_URL = '/api/events'
 
 const api = ky.create({
 	prefixUrl: API_URL,
