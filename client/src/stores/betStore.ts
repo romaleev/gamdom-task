@@ -1,5 +1,10 @@
 import { create } from 'zustand'
 
+export interface BetAmount {
+	event_id: number
+	amount: number
+}
+
 export type SelectedBet = {
 	event_id: number
 	odd_id: number
