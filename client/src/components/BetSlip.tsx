@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
 import { SelectedBet, useBetStore } from '#client/stores/betStore'
 import { useFetchEvents } from '#client/api/eventApi.ts'
@@ -67,6 +67,12 @@ const BetSlip = () => {
 		})
 	}
 
+	useEffect(() => {
+		if (selectedBet && stakeInputRef?.current) {
+			stakeInputRef.current.focus() // ✅ Auto-focus input when bet is selected
+		}
+	}, [selectedBet])
+
 	return (
 		<Box
 			sx={{
@@ -105,6 +111,8 @@ const BetSlip = () => {
 						InputProps={{
 							inputProps: {
 								'data-test': 'betslip-stake-amount', // ✅ Properly placed here
+								min: 1, // Prevent negative values
+								step: 1, // Ensure 2 decimal places
 							},
 						}}
 						sx={{
