@@ -1,16 +1,20 @@
-import { Box, CircularProgress, Snackbar, Alert, Typography } from '@mui/material'
+import { Box, CircularProgress, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next'
+import { useEffect } from 'react'
 import { useFetchEvents } from '#client/api/eventApi.ts'
 import EventItem from '#client/components/EventItem.tsx'
 import BetSlip from '#client/components/BetSlip.tsx'
 import { useUIStore } from '#client/stores/uiStore.ts'
-import { useTranslation } from 'react-i18next'
+import SnackBar from '#client/components/SnackBar.tsx'
 
 const EventPage = () => {
 	const { data: events, isLoading, isError } = useFetchEvents()
-	const { snackbarText, setSnackbarText } = useUIStore()
+	const { setSnackbarText } = useUIStore()
 	const { t } = useTranslation()
 
-	if (isError) setSnackbarText(t('eventPage.loadError'))
+	useEffect(() => {
+		if (isError) setSnackbarText(t('eventList.loadError'))
+	}, [isError])
 
 	return (
 		<Box
@@ -62,23 +66,7 @@ const EventPage = () => {
 				<BetSlip />
 			</Box>
 
-			<Snackbar open={!!snackbarText} autoHideDuration={3000} onClose={() => setSnackbarText('')}
-								message={snackbarText} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-				<Alert
-					sx={{
-						backgroundColor: snackbarText === 'Bet placed successfully!' ? 'secondary.main' : 'error.main',
-						color: 'black',
-						fontWeight: 'bold',
-						textAlign: 'center',
-						width: '100%',
-						minWidth: '300px',
-						boxShadow: 4,
-						borderRadius: 2,
-					}}
-				>
-					{snackbarText}
-				</Alert>
-			</Snackbar>
+			<SnackBar />
 		</Box>
 	)
 }
