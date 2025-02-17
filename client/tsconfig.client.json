@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+		"baseUrl": "./",
+		"paths": {
+			"#root/*": [
+				"../*"
+			],
+			"#client/*": [
+				"src/*"
+			]
+		},
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.client.tsbuildinfo",
     "target": "ES2020",
     "useDefineForClassFields": true,
