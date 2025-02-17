@@ -6,7 +6,7 @@
 	"scripts": {
 		"start": "NODE_ENV=development node --no-warnings=ExperimentalWarning --watch --import=tsx src/index.ts",
 		"build": "tsc --project tsconfig.server.json && tsc-alias --project tsconfig.server.json",
-		"prod": "wait-on tcp:database:5432 && npm run postgres:prepare && NODE_ENV=production node /app/server/dist/index.js",
+		"prod": "wait-on tcp:database:5432 && NODE_ENV=production node /app/server/dist/index.js",
 		"postgres:prepare": "npm run postgres:migrate && npm run postgres:seed",
 		"postgres:migrate": "drizzle-kit generate && drizzle-kit migrate",
 		"postgres:seed": "node --import=tsx src/db/seed.ts",

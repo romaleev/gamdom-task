@@ -10,6 +10,9 @@ COPY ../package.json ../package-lock.json ./
 # Copy client code
 COPY ./client/ ./client/
 
+# Copy types code
+COPY ./types/ ./types/
+
 # ✅ Ensure dependencies are installed correctly, including workspace dependencies
 RUN npm install --workspace client --ignore-scripts
 

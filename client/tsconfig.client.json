@@ -2,8 +2,8 @@
   "compilerOptions": {
 		"baseUrl": "./",
 		"paths": {
-			"#root/*": [
-				"../*"
+			"#types/*": [
+				"../types/*"
 			],
 			"#client/*": [
 				"src/*"
@@ -16,7 +16,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -24,12 +23,11 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+	"include": ["src"]
 }

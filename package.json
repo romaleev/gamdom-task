@@ -14,6 +14,7 @@
 		"postgres:start": "docker service ls | grep -w postgres && docker service update --force postgres || docker service create --name postgres --publish 5432:5432 --env-file ./server/.env --detach postgres:latest",
 		"postgres:stop": "docker service rm postgres",
 		"postgres:prepare": "npm run postgres:migrate -w server && npm run postgres:seed -w server",
+		"postgres:migrate": "npm run postgres:migrate -w server",
 		"docker:init": "(docker info | grep 'Swarm: active' || docker swarm init)",
 		"docker:deploy": "docker stack deploy -c docker-stack.yml gamdom-task",
 		"docker:build": "docker buildx bake --file docker-bake.hcl",

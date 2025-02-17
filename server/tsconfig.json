@@ -2,8 +2,8 @@
 	"compilerOptions": {
 		"baseUrl": "./",
 		"paths": {
-			"#root/*": [
-				"../*"
+			"#types/*": [
+				"../types/*"
 			],
 			"#server/*": [
 				"src/*"

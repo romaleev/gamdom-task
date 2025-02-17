@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express'
 import { logger, db } from '#server/app'
 import { events } from '#server/db/schema'
 import { eq } from 'drizzle-orm'
-import { Event } from '#root/types/eventTypes'
+import { Event } from '#types/eventTypes'
 
 const router = Router()
 

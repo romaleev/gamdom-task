@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button, CircularProgress } from '@mui/mater
 import { SelectedBet, useBetStore } from '#client/stores/betStore'
 import { useFetchEvents } from '#client/api/eventApi.ts'
 import { usePlaceBet } from '#client/api/betApi'
-import { Event } from '#root/types/eventTypes'
+import { Event } from '#types/eventTypes'
 import { useUIStore } from '#client/stores/uiStore.ts'
 import { useTranslation } from 'react-i18next'
 

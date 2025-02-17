@@ -1,6 +1,6 @@
 import { Card, CardContent, Typography, Box, Button } from '@mui/material'
 import { useBetStore } from '#client/stores/betStore'
-import { Event } from '#root/types/eventTypes'
+import { Event } from '#types/eventTypes'
 
 interface EventListItemProps {
 	event: Event
