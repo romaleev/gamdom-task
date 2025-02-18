@@ -12,3 +12,4 @@ export const postgresDB = process.env.POSTGRES_DB || ''
 export const postgresHost = process.env.POSTGRES_HOST || 'localhost'
 export const postgresPort = process.env.POSTGRES_PORT || '5432'
 export const dbURL = `postgres://${postgresUser}:${postgresPassword}@${postgresHost}:${postgresPort}/${postgresDB}`
+export const eventsApi = process.env.EVENTS_API || '/api/events'

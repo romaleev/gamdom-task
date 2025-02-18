@@ -1,6 +1,6 @@
 import express from 'express'
 import cors from 'cors'
-import { dbURL } from '#server/common/env'
+import { dbURL, eventsApi } from '#server/common/env'
 import pino from 'pino'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import pg from 'pg'
@@ -20,6 +20,6 @@ app.use(cors())
 app.use(express.json())
 
 // ✅ Use modular routes
-app.use('/api/events', eventRoutes)
+app.use(eventsApi, eventRoutes)
 
 export default app

@@ -13,6 +13,10 @@
 		"betSuccess": "Bet placed successfully!",
 		"betError": "Failed to place bet, please try again"
 	},
+	"api": {
+		"notFound": "Event not found",
+		"error": "Internal server error"
+	},
 	"betSchema": {
 		"required": "Stake amount is required",
 		"invalidFormat": "Invalid stake format, should be positive and up 2 decimals",
