@@ -38,3 +38,5 @@ export const eventSchema = z.object({
 export const idSchema = z.object({
 	id: z.string().regex(/^\d+$/, t('betSchema.invalidEventId')),
 })
+
+export type BetFormData = z.infer<typeof betSchema>

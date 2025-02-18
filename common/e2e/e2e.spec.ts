@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import i18n from '#common/i18n'
+import i18n from '#client/i18n'
 import { API_URL } from '#client/api/eventApi' // Import i18next translation function
 
 const { t } = i18n

@@ -1,6 +1,6 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
-import translationEN from '#common/locales/en.json' assert { type: 'json' }
+import translationEN from '#common/locales/en.ts'
 
 const resources = {
 	en: {

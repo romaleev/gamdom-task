@@ -1,6 +1,5 @@
 import i18n from 'i18next'
-import { initReactI18next } from 'react-i18next'
-import translationEN from '#common/locales/en.json'
+import translationEN from '#common/locales/en'
 
 const resources = {
 	en: {
@@ -8,7 +7,7 @@ const resources = {
 	},
 }
 
-i18n.use(initReactI18next).init({
+i18n.init({
 	resources,
 	lng: 'en', // default language
 	fallbackLng: 'en', // fallback language if key is missing

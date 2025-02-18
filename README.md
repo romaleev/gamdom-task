@@ -7,7 +7,7 @@ Details are [here](full-stack-developer-homework-assignment.pdf).
 - **⚽ Event-Based Betting System**: Browse live events and place bets in real time.
 - **📊 Dynamic Odds Display**: Events display odds dynamically fetched from the API.
 - **🎫 Bet Slip Management**: Select and manage bets via an intuitive bet slip.
-- **🚀 Optimized API Calls**: Uses `@tanstack/react-query` for caching and performance.
+- **🚀 Optimized Validated API Calls**: Uses `@tanstack/react-query` for caching and performance, `Zod` for validation.
 - **🔄 State Management with Zustand**: Efficient global state handling for UI and betting logic.
 - **🌐 Localization Support**: `i18next` integration for multilingual UI with structured translations.
 - **🎨 Modern UI**: Built with `Material-UI (MUI)` for a clean and responsive design.
@@ -22,7 +22,7 @@ Details are [here](full-stack-developer-homework-assignment.pdf).
 
 ## Tech Stack
 - **Client**: React 19, Zustand, Vite, Material UI, I18next, React Query
-- **Server**: Node.js, Express, Typescript, Pino
+- **Server**: Node.js, Express, Typescript, Pino, Zod
 - **Database**: Postgres, Drizzle
 - **Testing**: Playwright, Vitest, Supertest, Jest
 - **Deployment**: Docker, Docker Swarm
