@@ -3,7 +3,7 @@ import request from 'supertest'
 import app from '#server/app'
 import { db } from '#server/app'
 import { events } from '#server/db/schema'
-import { Event } from '#types/eventTypes'
+import { Event } from '#common/types'
 
 let event_id: number
 

@@ -34,7 +34,7 @@ export default defineConfig({
 	},
 	resolve: {
 		alias: {
-			'#types': path.resolve(__dirname, '../types'),
+			'#common': path.resolve(__dirname, '../common'),
 			'#client': path.resolve(__dirname, 'src'),
 		},
 	},

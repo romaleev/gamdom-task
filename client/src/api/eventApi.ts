@@ -1,6 +1,6 @@
 import ky from 'ky'
 import { useQuery } from '@tanstack/react-query'
-import { Event } from '#types/eventTypes'
+import { Event } from '#common/types'
 
 export const API_URL = '/api/events'
 

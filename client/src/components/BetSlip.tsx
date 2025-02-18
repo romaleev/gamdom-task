@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react'
 import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
-import { SelectedBet, useBetStore } from '#client/stores/betStore'
-import { useFetchEvents } from '#client/api/eventApi.ts'
-import { usePlaceBet } from '#client/api/betApi'
-import { Event } from '#types/eventTypes'
-import { useUIStore } from '#client/stores/uiStore.ts'
 import { useTranslation } from 'react-i18next'
+import { SelectedBet, useBetStore } from '#client/stores/betStore'
+import { useFetchEvents } from '#client/api/eventApi'
+import { usePlaceBet } from '#client/api/betApi'
+import { Event } from '#common/types'
+import { useUIStore } from '#client/stores/uiStore'
 
 const getSelectedOdd = (selectedBet: SelectedBet | null, events: Event[] | undefined) => {
 	if (!selectedBet) return null

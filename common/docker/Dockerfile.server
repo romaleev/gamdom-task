@@ -5,13 +5,13 @@ FROM node:18-alpine AS server
 WORKDIR /app
 
 # ✅ Copy the root package files first (to optimize Docker layer caching)
-COPY ../package.json ../package-lock.json ./
+COPY ../../package.json ../package-lock.json ./
 
 # Copy server code
 COPY ./server/ ./server/
 
 # Copy types code
-COPY ./types/ ./types/
+COPY ./common/ ./common/
 
 # ✅ Ensure dependencies are installed correctly, including workspace dependencies
 RUN npm install --workspace server --ignore-scripts

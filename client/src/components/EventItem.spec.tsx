@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import EventItem from '#client/components/EventItem'
 import { useBetStore } from '#client/stores/betStore'
-import { Event } from '#types/eventTypes'
+import { Event } from '#common/types'
 
 // Mock the useBetStore hook
 vi.mock('#client/stores/betStore.ts', () => ({
