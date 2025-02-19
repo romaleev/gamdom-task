@@ -32,35 +32,36 @@ Details are [here](full-stack-developer-homework-assignment.pdf).
 
 ### Installation
 
-Install dependencies, [Docker](https://docs.docker.com/get-docker/)
+Install [Docker](https://docs.docker.com/get-docker/) and NPM dependencies (**Steps 1-2**)
 
-`npm install` Install dependencies
+`brew install --cask docker` Install Docker using [brew](https://brew.sh/) example (**Step 1**)
 
-`brew install --cask docker` Install Docker using brew example
+`npm install` Install NPM dependencies (**Step 2**)
 
 ### Development
 
-Don't forget to stop Postgres when exit development mode
+Start app in Development mode with hot reload (**Steps 1-3**).
+The app will be available at `http://localhost:4200`.
 
-(1) `npm run postgres:start` Start Postgres
+`npm run postgres:start` Start Postgres (**Step 1**)
 
-(2) `npm run postgres:prepare` Create Postgres table and seed it with mock data
+`npm run postgres:prepare` Create Postgres table and seed it with mock data (**Step 2**)
 
-(3) `npm run start` Start client and server
+`npm run start` Start client and server (**Step 3**)
 
 `npm run start:client` Start client
 
 `npm run start:server` Start server
 
-`npm run postgres:stop` Stop Postgres
+`npm run postgres:stop` Stop Postgres (Don't forget to stop Postgres when exit Development mode)
 
 ### Testing
 
-Run application in development (1-3) or production (1-3) mode first
+Run the app in Development mode (**Steps 1-3**) or Production mode (**Steps 1-3**) first.
 
 `npm run test` Run client, server and e2e tests
 
-`npm run test:e2e` Run Playwright end-to-end tests
+`npm run test:e2e` Run end-to-end tests
 
 `npm run test:client` Run client tests
 
@@ -90,13 +91,14 @@ Build client and server
 
 ### Production
 
-Docker commands for client, server and Postgres images
+Start app in Production mode in Docker environment (**Steps 1-3**). 
+The app will be available at `http://localhost:4200`.
 
-(1) `npm run docker:build` Build Docker images
+`npm run docker:build` Build Docker images (**Step 1**)
 
-(2) `npm run docker:deploy` Deploy Docker containers
+`npm run docker:deploy` Deploy Docker containers (**Step 2**)
 
-(3) `npm run postgres:migrate` Create Postgres table
+`npm run postgres:migrate` Create Postgres table (**Step 3**)
 
 `npm run docker:rm` Remove Docker containers
 
@@ -119,7 +121,11 @@ Code quality checks and fixes
 `npm run update` Update libraries to the latest versions
 
 ## API Endpoints
+
 - **`GET /api/events`**: Fetch all available events.
+
 - **`POST /api/events`**: Create a new event with odds.
+
 - **`PUT /api/events`**: Update an existing event.
+
 - **`DELETE /api/events`**: Delete an event.
