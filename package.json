@@ -32,11 +32,13 @@
 		"test:coverage": "npm-run-all --parallel test:client:coverage test:server:coverage",
 		"test:client:coverage": "npm run test:coverage -w client",
 		"test:server:coverage": "npm run test:coverage -w server",
-		"test:e2e": "npx playwright test",
+		"test:e2e": "npm-run-all --parallel test:e2e:*",
+		"test:e2e:local": "npx playwright test --project=local",
+		"test:e2e:docker": "npx playwright test --project=docker",
 		"lint": "eslint {client,server,common}/src/**/*.ts && prettier {client,server,common}/src/**/*.ts",
 		"lint:fix": "eslint --fix {client,server,common}/src/**/*.ts && prettier --write {client,server,common}/src/**/*.ts",
 		"update": "npm i npm-check-updates@latest --save-dev && ncu --root -ws -u && npm i && npm audit fix && npm run lint && npm test",
-		"prepare": "husky && npm run docker:init && playwright install"
+		"prepare": "husky && npm run docker:init && docker pull postgres:latest && playwright install"
 	},
 	"workspaces": [
 		"client",

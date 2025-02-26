@@ -11,7 +11,7 @@ services:
   frontend:
     image: gamdom-task-frontend:latest
     ports:
-      - "4200:80"
+      - "4300:80"
     configs:
       - source: env
         target: /app/.env.production
@@ -30,7 +30,7 @@ services:
   backend:
     image: gamdom-task-backend:latest
     ports:
-      - "3000:3000"
+      - "3001:3001"
     configs:
       - source: env
         target: /app/.env.production  # ✅ Mount it inside the container
@@ -49,7 +49,7 @@ services:
   database:
     image: postgres:latest
     ports:
-      - "5432:5432"
+      - "5433:5433"
     configs:
       - source: env
         target: /app/.env.production  # ✅ Mount it inside the container
@@ -65,7 +65,7 @@ services:
       - db-data:/var/lib/postgresql/data
     command: >
       sh -c "export $$(grep -v '^#' /app/.env.production | xargs) &&
-      exec docker-entrypoint.sh postgres"
+      exec docker-entrypoint.sh postgres -p 5433"
 
 volumes:
   db-data:
