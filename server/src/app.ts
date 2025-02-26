@@ -1,10 +1,9 @@
 import express from 'express'
 import cors from 'cors'
-import { dbURL, eventsApi } from '#server/common/env'
 import pino from 'pino'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import pg from 'pg'
-
+import { dbURL, eventsApi } from '#server/common/env'
 import eventRoutes from '#server/routes/eventRoutes'
 
 // ✅ Initialize Express & Logger

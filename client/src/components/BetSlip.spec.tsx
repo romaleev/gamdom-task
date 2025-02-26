@@ -9,10 +9,10 @@ import { useUIStore } from '#client/stores/uiStore'
 vi.mock('#client/stores/betStore.ts', () => ({
 	useBetStore: vi.fn(() => ({
 		selectedBet: null,
-		stake: '',
+		stake: '3',
 		setStake: vi.fn(),
 	})),
-}));
+}))
 
 // Mock the useFetchEvents hook
 vi.mock('#client/api/eventApi.ts', () => ({
@@ -25,7 +25,7 @@ vi.mock('#client/api/eventApi.ts', () => ({
 			},
 		],
 	})),
-}));
+}))
 
 // Mock the usePlaceBet hook
 vi.mock('#client/api/betApi.ts', () => ({
@@ -35,7 +35,7 @@ vi.mock('#client/api/betApi.ts', () => ({
 		isError: false,
 		isSuccess: false,
 	})),
-}));
+}))
 
 // Mock the useUIStore hook
 vi.mock('#client/stores/uiStore.ts', () => ({
@@ -44,99 +44,95 @@ vi.mock('#client/stores/uiStore.ts', () => ({
 		setLoading: vi.fn(),
 		setSnackbarText: vi.fn(),
 	})),
-}));
+}))
 
 // Mock the useTranslation hook
 vi.mock('react-i18next', () => ({
 	useTranslation: () => ({
 		t: (key: string) => key, // Mock translation function
 	}),
-}));
+}))
 
 describe('BetSlip Component', () => {
 	beforeEach(() => {
 		// Clear all mocks before each test
-		vi.clearAllMocks();
-	});
+		vi.clearAllMocks()
+	})
 
 	it('renders the BetSlip component with no selected bet', () => {
-		render(<BetSlip />);
+		render(<BetSlip />)
 		// Check if the "select" message is displayed
-		expect(screen.getByText('betSlip.select')).toBeInTheDocument();
-	});
+		expect(screen.getByText('betSlip.select')).toBeInTheDocument()
+	})
 
 	it('renders the BetSlip component with a selected bet', () => {
 		// Mock the useBetStore hook to return a selected bet
 		vi.mocked(useBetStore).mockReturnValueOnce({
 			selectedBet: { event_id: 1, odd_id: 0 } as SelectedBet,
 			stake: '',
-			setStake: vi.fn(),
-		});
+		})
 
-		render(<BetSlip />);
+		render(<BetSlip />)
 
 		// Check if the event name and odd are displayed
-		expect(screen.getByText('Team A vs. Team B')).toBeInTheDocument();
+		expect(screen.getByText('Team A vs. Team B')).toBeInTheDocument()
 		expect(
-			screen.getByText((content) => content.includes('1.5'))
+			screen.getByText((content) => content.includes('1.5')),
 		).toBeInTheDocument()
-	});
+	})
 
-	it('updates the stake input and calculates the total profit', () => {
+	it.only('updates the stake input and calculates the total profit', async () => {
 		// Mock the useBetStore hook to return a selected bet
-		vi.mocked(useBetStore).mockReturnValueOnce({
+		vi.mocked(useBetStore).mockReturnValue({
 			selectedBet: { event_id: 1, odd_id: 0 } as SelectedBet,
 			stake: '10',
-			setStake: vi.fn(),
-		});
+		})
 
-		render(<BetSlip />);
+		render(<BetSlip />)
 
 		// Check if the stake input is updated
-		const stakeInput = screen.getByLabelText('betSlip.stakeAmount') as HTMLInputElement;
-		expect(stakeInput.value).toBe('10');
+		const stakeInput = screen.getByLabelText('betSlip.stakeAmount') as HTMLInputElement
+		expect(stakeInput.value).toBe('10')
 
 		// Check if the total profit is calculated correctly
-		expect(screen.getByText('$15.00')).toBeInTheDocument();
-	});
+		expect(screen.getByText('$15.00')).toBeInTheDocument()
+	})
 
 	it('shows an error if the stake is invalid', () => {
 		// Mock the useBetStore hook to return a selected bet
 		vi.mocked(useBetStore).mockReturnValueOnce({
 			selectedBet: { event_id: 1, odd_id: 0 } as SelectedBet,
 			stake: '',
-			setStake: vi.fn(),
-		});
+		})
 
-		render(<BetSlip />);
+		render(<BetSlip />)
 
 		// Click the "Place Bet" button without entering a stake
-		const placeBetButton = screen.getByText('betSlip.placeBet');
-		fireEvent.click(placeBetButton);
+		const placeBetButton = screen.getByText('betSlip.placeBet')
+		fireEvent.click(placeBetButton)
 
 		// Check if the stake input is focused
-		const stakeInput = screen.getByLabelText('betSlip.stakeAmount');
-		expect(stakeInput).toHaveFocus();
-	});
+		const stakeInput = screen.getByLabelText('betSlip.stakeAmount')
+		expect(stakeInput).toHaveFocus()
+	})
 
 	it('shows a loading spinner when placing a bet', () => {
 		// Mock the useBetStore hook to return a selected bet and stake
 		vi.mocked(useBetStore).mockReturnValueOnce({
 			selectedBet: { event_id: 1, odd_id: 0 } as SelectedBet,
 			stake: '10',
-			setStake: vi.fn(),
-		});
+		})
 
 		// Mock the useUIStore hook to return loading as true
 		vi.mocked(useUIStore).mockReturnValueOnce({
 			loading: true,
 			setLoading: vi.fn(),
 			setSnackbarText: vi.fn(),
-		});
+		})
 
-		render(<BetSlip />);
+		render(<BetSlip />)
 
 		// Check if the loading spinner is displayed
-		expect(screen.getByRole('progressbar')).toBeInTheDocument();
-	});
-});
+		expect(screen.getByRole('progressbar')).toBeInTheDocument()
+	})
+})

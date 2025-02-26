@@ -4,7 +4,7 @@ import { events } from '#server/db/schema'
 import { eq } from 'drizzle-orm'
 import { Event } from '#common/types'
 import { eventSchema, idSchema } from '#common/validation/schemas'
-import i18n from '#server/common/i18n'
+import i18n from '#common/i18n'
 import { validateRequest } from '#server/common/util'
 
 const { t } = i18n

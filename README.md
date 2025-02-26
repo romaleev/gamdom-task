@@ -17,7 +17,7 @@ Details are [here](full-stack-developer-homework-assignment.pdf).
 - **✅ Unit & E2E Testing**: `Vitest, Jest, Supertest, and Playwright` ensure high code quality.
 - **🛠️ Error Handling & Retry Logic**: Graceful API error handling and user notifications.
 - **🧹 Database Seeding & Migrations**: `Drizzle Kit` manages database schema and migrations.
-- **📜 Logging & Debugging**: `Pino` for structured logs and debugging.
+- **📜 Logging & Debugging**: [Postman](server/postman/events.postman_collection.json) collection, `Pino` for structured logs and debugging.
 - **🧪 Test Coverage & CI Integration**: Automated test execution with coverage reports.
 
 ## Tech Stack
@@ -40,26 +40,30 @@ Install [Docker](https://docs.docker.com/get-docker/) and NPM dependencies (**St
 
 ### Development
 
-Start app in Development mode with hot reload (**Steps 1-3**).
+Start app in Development mode with hot reload (**Step 1**).
 The app will be available at `http://localhost:4200`.
 
-`npm run postgres:start` Start Postgres (**Step 1**)
-
-`npm run postgres:prepare` Create Postgres table and seed it with mock data (**Step 2**)
-
-`npm run start` Start client and server (**Step 3**)
+`npm run start` Start client, server, Postgres service and prepares database with mock data (**Step 1**)
 
 `npm run start:client` Start client
 
 `npm run start:server` Start server
 
-`npm run postgres:stop` Stop Postgres (Don't forget to stop Postgres when exit Development mode)
+`npm run postgres:start` Start Postgres service, creates table and seed with mock data
+
+`npm run postgres:service` Start Postgres service
+
+`npm run postgres:prepare` Create Postgres table and seed it with mock data
+
+`npm run postgres:stop` Stop Postgres service
 
 ### Testing
 
-Run the app in Development mode (**Steps 1-3**) or Production mode (**Steps 1-3**) first.
+Run the app in Development mode (**Step 1**) or Production mode (**Steps 1-3**) first
 
 `npm run test` Run client, server and e2e tests
+
+`npm run test:docker` Docker build, deploy and test
 
 `npm run test:e2e` Run end-to-end tests
 

@@ -1,11 +1,12 @@
 import { useEffect, useRef } from 'react'
-import { Box, Typography, TextField, Button, CircularProgress } from '@mui/material'
+import { Box, Typography, Button, CircularProgress } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { SelectedBet, useBetStore } from '#client/stores/betStore'
 import { useFetchEvents } from '#client/api/eventApi'
 import { usePlaceBet } from '#client/api/betApi'
 import { Event } from '#common/types'
 import { useUIStore } from '#client/stores/uiStore'
+import StakeInput from '#client/components/StakeInput.tsx'
 
 const getSelectedOdd = (selectedBet: SelectedBet | null, events: Event[] | undefined) => {
 	if (!selectedBet) return null
@@ -98,45 +99,7 @@ const BetSlip = () => {
 											data-test={`betslip-event-stake`}>
 						{oddName}: {oddValue}
 					</Typography>
-					<TextField
-						type="number"
-						label={t('betSlip.stakeAmount')}
-						variant="outlined"
-						fullWidth
-						inputRef={stakeInputRef}
-						value={stake}
-						onChange={(e) => {
-							setStake(e.target.value)
-						}}
-						InputProps={{
-							inputProps: {
-								'data-test': 'betslip-stake-amount', // ✅ Properly placed here
-								min: 1, // Prevent negative values
-								step: 1, // Ensure 2 decimal places
-							},
-						}}
-						sx={{
-							mt: 2,
-							borderRadius: 1,
-							'& .MuiOutlinedInput-root': {
-								'& fieldset': {
-									borderColor: 'gray', // Keep border color
-								},
-								'&:hover fieldset': {
-									borderColor: 'secondary.main', // Hover effect
-								},
-								'&.Mui-focused fieldset': {
-									borderColor: 'secondary.main', // Keep focus color
-								},
-							},
-							'& label': {
-								color: 'text.secondary', // Keep label color
-							},
-							'& .MuiInputLabel-root.Mui-focused': {
-								color: 'secondary.main', // Label remains same when focused
-							},
-						}}
-					/>
+					<StakeInput ref={stakeInputRef} />
 					<Typography variant="body1" color="text.primary" sx={{ mt: 3, textAlign: 'center' }}>
 						{t('betSlip.estPayout')} <span>${totalProfit}</span>
 					</Typography>

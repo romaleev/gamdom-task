@@ -20,7 +20,6 @@ const seedDB = async () => {
 	// ✅ Explicitly close the database connection
 	if (db.$client) {
 		await db.$client.end()
-		console.log('🛑 Database connection closed.')
 	}
 
 	// ✅ Ensure process exits immediately after completion

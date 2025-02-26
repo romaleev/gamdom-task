@@ -4,7 +4,7 @@ import { I18nextProvider } from 'react-i18next'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import EventPage from '#client/pages/EventPage'
 import darkTheme from '#client/themes/darkTheme'
-import i18n from '#client/i18n.ts'
+import i18n from '#common/i18n'
 
 const queryClient = new QueryClient()
 

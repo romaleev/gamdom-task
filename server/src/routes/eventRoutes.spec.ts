@@ -4,7 +4,7 @@ import app from '#server/app'
 import { db } from '#server/app'
 import { events } from '#server/db/schema'
 import { Event } from '#common/types'
-import i18n from '#server/common/i18n'
+import i18n from '#common/i18n'
 import { eventsApi } from '#server/common/env'
 
 const { t } = i18n
