@@ -2,7 +2,7 @@ import { eq } from 'drizzle-orm'
 import request from 'supertest'
 import app from '#server/app'
 import { db } from '#server/app'
-import { events } from '#server/db/schema'
+import { events, odds } from '#server/db/schema'
 import { Event } from '#common/types'
 import i18n from '#common/i18n'
 import { eventsApi } from '#server/common/env'
@@ -41,7 +41,10 @@ describe('🎯 Events API Tests', () => {
 			.from(events)
 			.where(eq(events.event_id, res.body.event_id))
 		expect(createdEvent[0].event_name).toBe('Test Event')
-		expect(createdEvent[0].odds).toEqual([1.5, 3.2, 2.8])
+
+		const storedOdds = await db.select().from(odds).where(eq(odds.event_id, event_id))
+		expect(storedOdds.length).toBe(3)
+		expect(storedOdds.map((o) => Number(o.odd_value))).toEqual([1.5, 3.2, 2.8])
 	})
 
 	/**
@@ -75,7 +78,10 @@ describe('🎯 Events API Tests', () => {
 		// Validate database update
 		const updatedEvent = await db.select().from(events).where(eq(events.event_id, event_id))
 		expect(updatedEvent[0].event_name).toBe('Updated Event Name')
-		expect(updatedEvent[0].odds).toEqual([2.0, 3.0, 1.8])
+
+		const storedOdds = await db.select().from(odds).where(eq(odds.event_id, event_id))
+		expect(storedOdds.length).toBe(3)
+		expect(storedOdds.map((o) => Number(o.odd_value))).toEqual([2.0, 3.0, 1.8])
 	})
 
 	/**

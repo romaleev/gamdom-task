@@ -23,7 +23,6 @@
 		"docker:logs": "docker service ls --format '{{.Name}}' | grep '^gamdom-task_' | xargs -n1 -P4 docker service logs --follow --tail 100",
 		"docker:prune": "docker system prune -af && docker volume prune -f",
 		"test": "npm-run-all --parallel test:client test:server test:e2e",
-		"test:docker": "npm run docker:build && npm run docker:deploy && npm test",
 		"test:watch": "npm-run-all --parallel test:watch:*",
 		"test:client": "npm run test -w client",
 		"test:watch:client": "npm run test:watch -w client",
@@ -59,7 +58,14 @@
 		]
 	},
 	"keywords": [
-		"gamdom-task"
+		"gamdom-task",
+		"react",
+		"docker",
+		"postgres",
+		"node.js",
+		"typescript",
+		"monorepo",
+		"vite"
 	],
 	"author": "Roman Malieiev <aromaleev@gmail.com>",
 	"license": "MIT",

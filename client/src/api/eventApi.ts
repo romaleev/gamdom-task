@@ -1,6 +1,6 @@
 import ky from 'ky'
 import { useQuery } from '@tanstack/react-query'
-import { Event } from '#common/types'
+import { EventOdds } from '#common/types'
 
 export const API_URL = '/api/events'
 
@@ -13,11 +13,11 @@ const api = ky.create({
  * ✅ Fetch events
  */
 export const useFetchEvents = () => {
-	return useQuery<Event[]>({
+	return useQuery<EventOdds[]>({
 		queryKey: ['events'],
 		queryFn: async () => {
 			try {
-				return await api.get('').json<Event[]>() // Ky auto-parses JSON
+				return await api.get('').json<EventOdds[]>() // Ky auto-parses JSON
 			} catch (error) {
 				console.error('❌ Error fetching events:', error)
 				throw new Error('Failed to fetch events') // Ensure React Query marks it as an error

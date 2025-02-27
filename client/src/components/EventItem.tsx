@@ -1,9 +1,9 @@
 import { Card, CardContent, Typography, Box, Button } from '@mui/material'
 import { useBetStore } from '#client/stores/betStore'
-import { Event } from '#common/types'
+import { EventOdds } from '#common/types'
 
 interface EventListItemProps {
-	event: Event
+	event: EventOdds
 }
 
 const EventItem = (props: EventListItemProps) => {

@@ -4,11 +4,11 @@ import { useTranslation } from 'react-i18next'
 import { SelectedBet, useBetStore } from '#client/stores/betStore'
 import { useFetchEvents } from '#client/api/eventApi'
 import { usePlaceBet } from '#client/api/betApi'
-import { Event } from '#common/types'
+import { EventOdds } from '#common/types'
 import { useUIStore } from '#client/stores/uiStore'
 import StakeInput from '#client/components/StakeInput.tsx'
 
-const getSelectedOdd = (selectedBet: SelectedBet | null, events: Event[] | undefined) => {
+const getSelectedOdd = (selectedBet: SelectedBet | null, events: EventOdds[] | undefined) => {
 	if (!selectedBet) return null
 	const event = events?.find((e) => e.event_id === selectedBet.event_id)
 	if (!event) return null

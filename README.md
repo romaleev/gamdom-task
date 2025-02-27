@@ -63,9 +63,11 @@ Run the app in Development mode (**Step 1**) or Production mode (**Steps 1-3**) 
 
 `npm run test` Run client, server and e2e tests
 
-`npm run test:docker` Docker build, deploy and test
-
 `npm run test:e2e` Run end-to-end tests
+
+`npm run test:e2e:local` Run end-to-end tests for local environment
+
+`npm run test:e2e:docker` Run end-to-end tests for Docker environment
 
 `npm run test:client` Run client tests
 

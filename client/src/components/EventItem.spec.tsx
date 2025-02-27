@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom'
 import EventItem from '#client/components/EventItem'
 import { useBetStore } from '#client/stores/betStore'
-import { Event } from '#common/types'
+import { EventOdds } from '#common/types'
 
 // Mock the useBetStore hook
 vi.mock('#client/stores/betStore.ts', () => ({
@@ -14,7 +14,7 @@ vi.mock('#client/stores/betStore.ts', () => ({
 }))
 
 describe('EventItem Component', () => {
-	const mockEvent: Event = {
+	const mockEvent: EventOdds = {
 		event_id: 1,
 		event_name: 'Team A vs. Team B',
 		odds: [2.0, 3.5, 1.8],
@@ -31,7 +31,7 @@ describe('EventItem Component', () => {
 		render(<EventItem event={mockEvent}
 		/>)
 
-		mockEvent.odds.forEach((odd) => {
+		mockEvent.odds?.forEach((odd) => {
 			expect(screen.getByText(odd.toString())).toBeInTheDocument()
 		})
 	})
