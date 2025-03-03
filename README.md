@@ -59,7 +59,7 @@ The app will be available at `http://localhost:4200`.
 
 ### Testing
 
-Run the app in Development mode (**Step 1**) or Production mode (**Steps 1-3**) first
+Run the app in Development mode (**Step 1**) and Production mode (**Steps 1-3**) first
 
 `npm run test` Run client, server and e2e tests
 

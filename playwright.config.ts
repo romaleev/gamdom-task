@@ -1,4 +1,9 @@
+import dotenv from 'dotenv'
 import { defineConfig } from '@playwright/test'
+
+const devEnv = dotenv.config({ path: './common/.env' })
+const prodEnv = dotenv.config({ path: './common/.env.production' })
+
 
 export default defineConfig({
 	testDir: './common/e2e',
@@ -18,14 +23,14 @@ export default defineConfig({
 			name: 'local',
 			outputDir: 'test-results/local',
 			use: {
-				baseURL: 'http://localhost:4200',
+				baseURL: `http://localhost:${devEnv.parsed.CLIENT_PORT}`,
 			},
 		},
 		{
 			name: 'docker',
 			outputDir: 'test-results/docker',
 			use: {
-				baseURL: 'http://localhost:4300',
+				baseURL: `http://localhost:${prodEnv.parsed.CLIENT_PORT}`,
 			},
 		},
 	],

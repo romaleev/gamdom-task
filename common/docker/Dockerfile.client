@@ -10,7 +10,7 @@ COPY ../../package.json ../package-lock.json ./
 # Copy client code
 COPY ./client/ ./client/
 
-# Copy types code
+# Copy common code
 COPY ./common/ ./common/
 
 # ✅ Ensure dependencies are installed correctly, including workspace dependencies

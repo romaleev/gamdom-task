@@ -12,7 +12,7 @@
 		"build:client": "npm run build -w client",
 		"build:server": "npm run build -w server",
 		"postgres:start": "npm-run-all --sequential postgres:service postgres:prepare",
-		"postgres:service": "docker service ls | grep -w database-dev && docker service update --force database-dev || docker service create --name database-dev --publish 5432:5432 --env-file ./server/.env --detach postgres:latest && wait-on tcp:localhost:5432",
+		"postgres:service": "docker service ls | grep -w database-dev && docker service update --force database-dev || docker service create --name database-dev --publish 5432:5432 --env-file ./common/.env --detach postgres:latest && wait-on tcp:localhost:5432",
 		"postgres:stop": "docker service ls | grep -q database-dev && docker service rm database-dev",
 		"postgres:prepare": "npm run postgres:prepare -w server",
 		"docker:init": "(docker info | grep 'Swarm: active' || docker swarm init)",
